@@ -24,26 +24,34 @@ npm run build
 ```bash
 npm test
 # Runs the test suite in interactive watch mode
+
+# Run tests with coverage
+npm test -- --coverage
+
+# Run tests without watch mode (CI)
+CI=true npm test
 ```
 
-### Linting and Formatting
+### Other Commands
 ```bash
 npm run eject
-# Ejects from Create React App (WARNING: This is irreversible)
+# Ejects from Create React App (WARNING: This is irreversible - DO NOT USE unless absolutely necessary)
 ```
 
 ## Architecture Overview
 
 ### Tech Stack
-- **Frontend**: React 18 with TypeScript
-- **Styling**: Tailwind CSS with custom Korean fonts (Noto Sans KR)
+- **Frontend**: React 19.1.0 with TypeScript 4.9.5
+- **Build Tool**: Create React App 5.0.1
+- **Styling**: Tailwind CSS v2 (compat mode) with PostCSS 7
 - **Charts**: Recharts for data visualization
 - **Icons**: Lucide React
-- **Animations**: CSS animations with Tailwind utilities
+- **Animations**: Framer Motion + CSS animations with Tailwind utilities
+- **Testing**: Jest with React Testing Library
 
 ### Application Structure
 The app follows a single-page application (SPA) pattern with conditional rendering:
-- **Main Flow**: Hero → Product Showcase → AI Tech → Company sections
+- **Main Flow**: Hero → Business Model → Product Showcase → AI Tech → Company sections
 - **AI Analysis Flow**: Triggered by CTA buttons, provides 3-step analysis process
 
 ### Component Architecture
@@ -51,6 +59,7 @@ The app follows a single-page application (SPA) pattern with conditional renderi
 App.tsx (Main container with routing logic)
 ├── Header.tsx (Navigation and branding)
 ├── HeroSection.tsx (Landing page with CTA)
+├── BusinessModel.tsx (Business model section)
 ├── AIAnalysisFlow.tsx (Core AI analysis feature)
 ├── ProductShowcase.tsx (10 health categories + products)
 ├── AITechSection.tsx (Technology showcase)
@@ -161,6 +170,9 @@ Sample health indicators are used to simulate AI analysis results. The recommend
 - Proper Korean typography with Noto Sans KR
 - Cultural considerations in design and content
 
+### Build Status
+A production build already exists in the `/build` directory, ready for deployment. The build uses optimized assets and can be served directly.
+
 ## Future Development Considerations
 
 ### Potential Enhancements
@@ -193,3 +205,11 @@ npm install --legacy-peer-deps
 # or
 npm ci
 ```
+
+## Configuration Files
+
+### Key Configurations
+- **tsconfig.json**: Strict TypeScript configuration with ES5 target
+- **tailwind.config.js**: Custom theme with primary/health colors and Korean fonts
+- **postcss.config.js**: Configured for Tailwind CSS and Autoprefixer
+- **package.json**: React 19.1.0 with CRA 5.0.1, includes all necessary scripts
