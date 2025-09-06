@@ -8,188 +8,133 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Commands
 
-### Development Server
 ```bash
-npm start
-# Starts the development server on http://localhost:3000
-```
+# Install dependencies (use --legacy-peer-deps if encountering peer dependency issues)
+npm install
+npm install --legacy-peer-deps  # If standard install fails
 
-### Build
-```bash
-npm run build
-# Creates an optimized production build in the build/ directory
-```
+# Development server
+npm start  # Runs on http://localhost:3000
 
-### Test
-```bash
-npm test
-# Runs the test suite in interactive watch mode
-```
+# Production build
+npm run build  # Creates optimized build in build/ directory
 
-### Linting and Formatting
-```bash
+# Run tests
+npm test  # Interactive watch mode
+npm test -- --coverage  # With coverage report
+npm test -- --watchAll=false  # Run once without watch
+
+# Eject from Create React App (WARNING: Irreversible)
 npm run eject
-# Ejects from Create React App (WARNING: This is irreversible)
 ```
 
 ## Architecture Overview
 
 ### Tech Stack
-- **Frontend**: React 18 with TypeScript
-- **Styling**: Tailwind CSS with custom Korean fonts (Noto Sans KR)
+- **Frontend**: React 18 with TypeScript (Create React App)
+- **Styling**: Tailwind CSS v2 (PostCSS 7 compatibility mode) with Noto Sans KR fonts
 - **Charts**: Recharts for data visualization
 - **Icons**: Lucide React
-- **Animations**: CSS animations with Tailwind utilities
+- **Animations**: Framer Motion + CSS animations with Tailwind utilities
+- **TypeScript**: Strict mode enabled
 
-### Application Structure
-The app follows a single-page application (SPA) pattern with conditional rendering:
-- **Main Flow**: Hero → Product Showcase → AI Tech → Company sections
-- **AI Analysis Flow**: Triggered by CTA buttons, provides 3-step analysis process
+### Application Flow
+Single-page application with conditional rendering based on user interaction:
+1. **Landing Page**: Hero section with CTA buttons
+2. **Main Content**: Product showcase, AI tech, business model, company sections
+3. **AI Analysis Modal**: 3-step health analysis flow (triggered by CTAs)
 
-### Component Architecture
+## Component Structure
+
 ```
-App.tsx (Main container with routing logic)
-├── Header.tsx (Navigation and branding)
-├── HeroSection.tsx (Landing page with CTA)
-├── AIAnalysisFlow.tsx (Core AI analysis feature)
-├── ProductShowcase.tsx (10 health categories + products)
-├── AITechSection.tsx (Technology showcase)
-├── CompanySection.tsx (Team and company info)
-└── Footer.tsx (Links and contact info)
-```
+src/
+├── components/
+│   ├── AIAnalysisFlow.tsx     # 3-step health analysis modal
+│   ├── AITechSection.tsx      # AI technology showcase
+│   ├── BusinessModel.tsx      # Business model section
+│   ├── CompanySection.tsx     # Team and company info
+│   ├── Footer.tsx             # Footer with links
+│   ├── Header.tsx             # Navigation header
+│   ├── HeroSection.tsx        # Landing hero with CTAs
+│   └── ProductShowcase.tsx    # Health categories & products
+├── data/
+│   └── mockData.ts            # All sample data centralized here
+└── App.tsx                    # Main app with state management
 
-## Key Features
+## Key Implementation Details
 
-### 1. AI Health Analysis Flow (Core Feature)
-- **Step 1**: File upload (PDF/image health checkup results)
-- **Step 2**: AI analysis simulation with progress tracking
-- **Step 3**: Personalized side dish recommendations with shopping cart
+### AI Analysis Flow (`AIAnalysisFlow.tsx`)
+- **Modal-based**: Overlays entire screen when activated
+- **3-step process**: File upload → Analysis → Recommendations
+- **State management**: Uses React useState for step navigation and data
+- **File handling**: Accepts PDF/images but uses mock data for demo
+- **Progress simulation**: Realistic timing with progress indicators
 
-### 2. Health Categories System
-10 specialized categories:
-- Stress relief (스트레스 해소)
-- Immunity boost (면역력 강화)
-- Diabetes management (당뇨 관리)
-- Cholesterol improvement (콜레스테롤 개선)
-- Hypertension management (고혈압 관리)
-- Digestion improvement (소화개선)
-- Liver health (간 건강)
-- Bone health (뼈 건강)
-- Anemia improvement (빈혈 개선)
-- Skin health (피부 건강)
+### Product Categories (`ProductShowcase.tsx`)
+10 health categories with Korean/English names:
+- 스트레스 해소 (Stress relief)
+- 면역력 강화 (Immunity boost)
+- 당뇨 관리 (Diabetes management)
+- 콜레스테롤 개선 (Cholesterol improvement)
+- 고혈압 관리 (Hypertension management)
+- 소화개선 (Digestion improvement)
+- 간 건강 (Liver health)
+- 뼈 건강 (Bone health)
+- 빈혈 개선 (Anemia improvement)
+- 피부 건강 (Skin health)
 
-### 3. Product Management
-Each side dish includes:
-- Nutritional information
-- Health benefits
-- Scientific backing
-- Chef recommendations
-- Pricing and shopping cart functionality
+### Data Management (`src/data/mockData.ts`)
+Centralized mock data includes:
+- Health checkup sample results
+- 12+ side dish products with full details
+- Team member profiles
+- Health indicator definitions
+- Category mappings
 
-## Data Structure
+## Styling and Design System
 
-### Key Interfaces
-```typescript
-interface HealthIndicator {
-  name: string;
-  value: number;
-  unit: string;
-  normalRange: string;
-  status: 'normal' | 'warning' | 'danger';
-}
+### Tailwind Configuration
+- Using Tailwind CSS v2 in PostCSS 7 compatibility mode
+- Custom color palette: Green (#22c55e) for health, Blue (#0ea5e9) for medical
+- Korean typography: Noto Sans KR (imported in index.css)
+- Responsive breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
 
-interface SideDish {
-  id: string;
-  name: string;
-  description: string;
-  benefits: string[];
-  category: string;
-  price: number;
-  // ... additional properties
-}
-```
+### Animation Patterns
+- Framer Motion for component animations
+- CSS keyframes defined in index.css for custom animations
+- Tailwind transitions for hover/focus states
+- Smooth scroll behavior for navigation
 
-### Mock Data Location
-All sample data is centralized in `src/data/mockData.ts`:
-- Sample health checkup results
-- 12+ side dish products
-- Team member information
-- Health categories definitions
-- AI analysis simulation steps
+## State Management Patterns
 
-## Styling Guidelines
+### App.tsx
+- Central state management using React hooks
+- `showAnalysis` state controls AI analysis modal visibility
+- Props passed down to child components
+- No Redux or Context API - simple prop drilling
 
-### Color Scheme
-- **Primary**: Green palette (#22c55e) - health and nature
-- **Health**: Blue palette (#0ea5e9) - medical and trust
-- **Korean Typography**: Noto Sans KR font family
+### Component Communication
+- Parent-to-child: Props for data and callbacks
+- Child-to-parent: Callback functions (e.g., onClose handlers)
+- Sibling components: Communicate through App.tsx state
 
-### Design Principles
-- Clean, modern design inspired by farmkit.kr
-- Mobile-first responsive approach
-- Accessibility considerations (WCAG compliance)
-- Smooth animations and micro-interactions
-- Trust-building elements (certifications, statistics)
+## Important Notes
 
-## Development Patterns
+### Current Implementation Status
+- **Demo/Prototype**: All features use mock data
+- **No Backend**: Frontend-only React application
+- **No Real AI**: Analysis simulation with setTimeout delays
+- **Static Data**: All content hardcoded in mockData.ts
+- **No Persistence**: Cart/selections reset on page reload
 
-### State Management
-- React useState for local component state
-- Props drilling for data sharing between components
-- No external state management library (Redux/Zustand) used
+### Korean Language Considerations
+- All UI text in Korean (한국어)
+- Date format: YYYY년 MM월 DD일
+- Currency: ₩ (Korean Won)
+- Phone format: 1588-XXXX or 02-XXXX-XXXX
 
-### Animation Strategy
-- CSS keyframes for complex animations
-- Tailwind transition utilities for simple hover effects
-- Framer Motion style animations (implemented with CSS)
-
-### Responsive Design
-- Tailwind's responsive prefixes (sm:, md:, lg:, xl:)
-- Mobile-first approach
-- Flexible grid layouts
-
-## Important Implementation Details
-
-### File Upload Simulation
-The AI analysis flow accepts files but uses simulated processing - no actual OCR or AI analysis occurs. The app demonstrates the UX flow with realistic timing and progress indicators.
-
-### Health Data Analysis
-Sample health indicators are used to simulate AI analysis results. The recommendation logic matches health conditions to appropriate side dish categories.
-
-### Korean Localization
-- All user-facing text is in Korean
-- Proper Korean typography with Noto Sans KR
-- Cultural considerations in design and content
-
-## Future Development Considerations
-
-### Potential Enhancements
-- Real AI integration for health analysis
-- User authentication and profiles
-- Shopping cart persistence
-- Payment integration
-- Real product images
-- Content management system
-- Multi-language support
-
-### Performance Optimizations
-- Lazy loading for images
-- Code splitting for different sections
-- Caching strategies for API calls
-- Bundle size optimization
-
-## Troubleshooting
-
-### Common Issues
-- **Build fails**: Check Tailwind CSS configuration in tailwind.config.js
-- **Styles not loading**: Ensure @tailwind directives are in src/index.css
-- **Charts not rendering**: Verify recharts import statements
-- **Korean fonts not loading**: Check Google Fonts import in index.css
-
-### Dependencies
-If you encounter issues, try:
-```bash
-npm install --legacy-peer-deps
-# or
-npm ci
-```
+### Development Gotchas
+- **Tailwind v2**: Using compatibility mode, not latest v3
+- **React 18**: Some testing library warnings may appear
+- **TypeScript Strict**: All components must be properly typed
+- **PostCSS 7**: Due to Create React App compatibility
