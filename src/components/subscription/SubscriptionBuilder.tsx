@@ -39,10 +39,10 @@ const SubscriptionBuilder: React.FC = () => {
         </div>
         <div className="hidden md:flex items-center gap-6 text-sm font-korean text-gray-500">
           {['Home', 'Our Approach', 'Subscription', 'About Us', 'Contact'].map(item => (
-            <a key={item} href="#" className="hover:text-green-700 transition-colors"
+            <button key={item} className="hover:text-green-700 transition-colors"
               style={{ color: item === 'Subscription' ? '#1B4332' : undefined, fontWeight: item === 'Subscription' ? 600 : undefined }}>
               {item}
-            </a>
+            </button>
           ))}
         </div>
       </nav>

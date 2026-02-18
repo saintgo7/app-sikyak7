@@ -61,9 +61,9 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {['서비스 소개', '건강 반찬', 'AI 기술', '회사소개', '고객지원'].map(item => (
                 <li key={item}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-korean">
+                  <button className="text-sm text-white/50 hover:text-white transition-colors font-korean">
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -75,9 +75,9 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               {['스트레스 해소', '면역력 강화', '당뇨 관리', '콜레스테롤 개선', '고혈압 관리'].map(item => (
                 <li key={item}>
-                  <a href="#" className="text-sm text-white/50 hover:text-white transition-colors font-korean">
+                  <button className="text-sm text-white/50 hover:text-white transition-colors font-korean">
                     {item}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -109,21 +109,20 @@ const Footer: React.FC = () => {
           </p>
           <div className="flex items-center gap-4">
             {[Facebook, Instagram, Youtube, Linkedin].map((Icon, i) => (
-              <a
+              <button
                 key={i}
-                href="#"
                 className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.1)' }}
               >
                 <Icon className="w-4 h-4 text-white/60" />
-              </a>
+              </button>
             ))}
           </div>
           <div className="flex gap-5">
             {['개인정보처리방침', '이용약관', '쿠키정책'].map(item => (
-              <a key={item} href="#" className="text-xs text-white/40 hover:text-white transition-colors font-korean">
+              <button key={item} className="text-xs text-white/40 hover:text-white transition-colors font-korean">
                 {item}
-              </a>
+              </button>
             ))}
           </div>
         </div>

@@ -81,9 +81,9 @@ const CheckoutPage: React.FC = () => {
           </button>
           <p className="text-xs text-center text-gray-400 mt-3 font-korean">
             By clicking, you agree to our{' '}
-            <a href="#" style={{ color: '#2D6A4F' }}>Terms of Service</a>
+            <button style={{ color: '#2D6A4F' }}>Terms of Service</button>
             {' '}and{' '}
-            <a href="#" style={{ color: '#2D6A4F' }}>Privacy Policy</a>
+            <button style={{ color: '#2D6A4F' }}>Privacy Policy</button>
           </p>
         </div>
       </div>

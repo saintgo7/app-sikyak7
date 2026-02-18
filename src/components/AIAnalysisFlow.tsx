@@ -8,12 +8,6 @@ interface AIAnalysisFlowProps {
   onBack: () => void;
 }
 
-interface AnalysisStep {
-  step: number;
-  title: string;
-  description: string;
-  duration: number;
-}
 
 const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) => {
   const [currentStep, setCurrentStep] = useState(1);
