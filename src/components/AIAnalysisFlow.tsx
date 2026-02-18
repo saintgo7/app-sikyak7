@@ -123,7 +123,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
   }));
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
+    <div className="min-h-screen bg-surface-secondary py-8">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
@@ -155,7 +155,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                 <div className={`
                   w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg
                   ${currentStep >= step.num 
-                    ? 'bg-primary-500 text-white' 
+                    ? 'bg-primary-600 text-white' 
                     : 'bg-gray-200 text-gray-600'
                   }
                 `}>
@@ -168,7 +168,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                 {index < 2 && (
                   <div className={`
                     absolute top-6 left-1/2 w-24 h-0.5 transform translate-x-6
-                    ${currentStep > step.num ? 'bg-primary-500' : 'bg-gray-200'}
+                    ${currentStep > step.num ? 'bg-primary-600' : 'bg-gray-200'}
                   `} />
                 )}
               </div>
@@ -180,7 +180,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
         {currentStep === 1 && (
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="text-center">
-              <Upload className="w-16 h-16 text-primary-500 mx-auto mb-6" />
+              <Upload className="w-16 h-16 text-primary-600 mx-auto mb-6" />
               <h2 className="text-4xl font-bold text-gray-900 mb-4 font-korean">
                 건강검진 결과를 업로드해주세요
               </h2>
@@ -249,7 +249,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                 className={`
                   px-8 py-3 rounded-full text-lg font-semibold transition-all duration-300 font-korean
                   ${uploadedFile
-                    ? 'bg-primary-500 text-white hover:bg-primary-600 transform hover:scale-105'
+                    ? 'bg-primary-600 text-white hover:bg-primary-700 transform hover:scale-105'
                     : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }
                 `}
@@ -266,7 +266,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
             <div className="text-center">
               <div className="relative mb-8">
                 <div className="w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mx-auto">
-                  <Brain className="w-12 h-12 text-primary-500 animate-pulse" />
+                  <Brain className="w-12 h-12 text-primary-600 animate-pulse" />
                 </div>
                 <div className="absolute inset-0 w-24 h-24 border-4 border-primary-500 rounded-full animate-spin mx-auto opacity-20"></div>
               </div>
@@ -287,9 +287,9 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                     <div className={`
                       w-8 h-8 rounded-full flex items-center justify-center mr-4 font-semibold
                       ${index < currentAnalysisStep
-                        ? 'bg-primary-500 text-white'
+                        ? 'bg-primary-600 text-white'
                         : index === currentAnalysisStep
-                        ? 'bg-primary-500 text-white animate-pulse'
+                        ? 'bg-primary-600 text-white animate-pulse'
                         : 'bg-gray-300 text-gray-600'
                       }
                     `}>
@@ -362,7 +362,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                         />
                         <Bar 
                           dataKey="value" 
-                          fill="#22c55e"
+                          fill="#0066FF"
                         />
                       </BarChart>
                     </ResponsiveContainer>
@@ -420,7 +420,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                               flex items-center px-4 py-2 rounded-full text-sm font-semibold transition-all
                               ${isInCart
                                 ? 'bg-green-500 text-white hover:bg-green-600'
-                                : 'bg-primary-500 text-white hover:bg-primary-600'
+                                : 'bg-primary-600 text-white hover:bg-primary-700'
                               }
                             `}
                           >
@@ -447,7 +447,7 @@ const AIAnalysisFlow: React.FC<AIAnalysisFlowProps> = ({ onComplete, onBack }) =
                     <span className="text-lg font-semibold text-primary-900 font-korean">
                       장바구니에 {cart.length}개 상품이 담겨있습니다
                     </span>
-                    <button className="bg-primary-500 text-white px-6 py-3 rounded-full hover:bg-primary-600 transition-colors font-korean">
+                    <button className="bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors font-korean">
                       주문하기
                     </button>
                   </div>
